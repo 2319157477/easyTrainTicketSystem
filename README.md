@@ -1,0 +1,2 @@
+这是一份大学Java实训作业
+导入目录下的train_station.sql文件到本地mysql数据库中，确保本地数据库包含密码为lbc041103的root用户即可使用
