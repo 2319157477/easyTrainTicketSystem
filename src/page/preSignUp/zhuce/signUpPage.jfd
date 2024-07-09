@@ -1,0 +1,158 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"visible": true
+			"defaultCloseOperation": 2
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+				"JavaCodeGenerator.customCreateCode": "ButtonGroup group = new ButtonGroup();\n        group.add(radioButton1);\n        group.add(radioButton2);"
+			}
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "用户名"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 40
+				"y": 45
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "电话号码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 40
+				"y": 85
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "密码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 40
+				"y": 125
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "确认密码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 40
+				"y": 165
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "确定创建"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "CreateUser", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 45
+				"y": 240
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "返回"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 225
+				"y": 240
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "usernameFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 110
+				"y": 45
+				"height": 30
+				"width": 200
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField2"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "userPhoneNumberFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 110
+				"y": 85
+				"width": 200
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField1"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "passwordField1FocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 110
+				"y": 125
+				"width": 200
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField2"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "passwordFieldRepeatFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 200
+				"height": 30
+				"x": 110
+				"y": 165
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 330
+				"y": 50
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "userPhoneErr"
+				"text": "已存在！"
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 335
+				"y": 90
+				"width": 85
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "userPwdErr"
+				"text": "两次输入不同！"
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 335
+				"y": 170
+				"width": 85
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton1"
+				"text": "男"
+				auxiliary() {
+					"JavaCodeGenerator.preCreateCode": "ButtonGroup group = new ButtonGroup();"
+					"JavaCodeGenerator.postCreateCode": "group.add(radioButton1);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Man", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 115
+				"y": 210
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton2"
+				"text": "女"
+				auxiliary() {
+					"JavaCodeGenerator.postCreateCode": "group.add(radioButton2);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Woman", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 230
+				"y": 210
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "性别"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 40
+				"y": 210
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 20, 5 )
+			"size": new java.awt.Dimension( 465, 320 )
+		} )
+	}
+}

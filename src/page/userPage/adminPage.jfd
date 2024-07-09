@@ -1,0 +1,40 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"title": "管理员界面"
+			"visible": true
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "火车管理"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "manage_train", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 25
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "用户管理"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "manage_user", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 70
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": "退出系统"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 115
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 410, 310 )
+		} )
+	}
+}

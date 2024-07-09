@@ -1,0 +1,147 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "用户号码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 60
+				"height": 17
+				"x": 20
+				"y": 60
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "用户密码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 65
+				"height": 17
+				"x": 20
+				"y": 95
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "pwdInput"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 30
+				"x": 115
+				"y": 90
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "用户姓名"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 60
+				"height": 17
+				"x": 20
+				"y": 135
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "nameInput"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 30
+				"x": 115
+				"y": 130
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "SureButton", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 78
+				"height": 30
+				"x": 225
+				"y": 190
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "idInput"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "train_idFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 115
+				"y": 55
+				"width": 130
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "idErr"
+				"text": "已存在！"
+				"visible": false
+				auxiliary() {
+					"JavaCodeGenerator.postCreateCode": "createUIComponents();"
+				}
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 205
+				"y": 60
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "用户类型"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 290
+				"y": 75
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "用户性别"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 290
+				"y": 125
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonMan"
+				"text": "男"
+				auxiliary() {
+					"JavaCodeGenerator.preCreateCode": "g2 = new ButtonGroup();"
+					"JavaCodeGenerator.postCreateCode": "g2.add(radioButtonMan);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "man_G", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 355
+				"y": 125
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonWoman"
+				"text": "女"
+				auxiliary() {
+					"JavaCodeGenerator.postCreateCode": "g2.add(radioButtonWoman);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "woman_G", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 420
+				"y": 125
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonDefault"
+				"text": "普通"
+				auxiliary() {
+					"JavaCodeGenerator.preCreateCode": "g1 = new ButtonGroup();"
+					"JavaCodeGenerator.postCreateCode": "g1.add(radioButtonDefault);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "default_T", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 355
+				"y": 75
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonAdmin"
+				"text": "管理员"
+				auxiliary() {
+					"JavaCodeGenerator.postCreateCode": "g1.add(radioButtonAdmin);"
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "admin_T", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 420
+				"y": 75
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 105, 70 )
+			"size": new java.awt.Dimension( 550, 295 )
+		} )
+	}
+}

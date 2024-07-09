@@ -1,0 +1,63 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"visible": true
+			"title": "用户登录"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "电话号码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 45
+				"y": 45
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "密码"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 45
+				"y": 110
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "usernameInput"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "usernameInputFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 110
+				"y": 40
+				"width": 140
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "pwdInput"
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "pwdInputFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 110
+				"y": 105
+				"width": 140
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "登录"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "SignUp", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 50
+				"y": 205
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "返回"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 220
+				"y": 205
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 95, 45 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
