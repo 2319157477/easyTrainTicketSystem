@@ -2,10 +2,11 @@
  * Created by JFormDesigner on Sat Jul 06 19:51:40 CST 2024
  */
 
-package page.manage.Ticket.UserAction;
+package page.Actions.Ticket.UserAction;
 
 
-import page.manage.Ticket.AdminAction.searchPage;
+import page.Actions.Ticket.AdminAction.searchPage;
+import sql.DBUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -19,10 +20,6 @@ import java.sql.*;
  * @author 23191
  */
 public class myTickets extends JFrame {
-    String url = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312";
-    String username = "root";
-    String password = "lbc041103";
-    Connection admin_con;
     int alter_id = -1;
     Statement adminState;
     ResultSet adminRs;
@@ -38,15 +35,11 @@ public class myTickets extends JFrame {
     int seat_id;
     int order_money;
     String train_start_date;
+    Color gray = new Color(54, 54, 54);
     String[] columnNames =
             {"票号", "电话号码", "列车id", "始发站", "终点站", "车厢", "座位", "票型", "发车时间"};
     public myTickets(String phone) {
         user_phone_number = phone;
-        try {
-            admin_con = DriverManager.getConnection(url, username, password);
-        } catch (SQLException var10) {
-            throw new RuntimeException(var10);
-        }
         initComponents();
     }
     private void Search(ActionEvent e) {
@@ -57,7 +50,7 @@ public class myTickets extends JFrame {
             scrollPane1.revalidate();
             scrollPane1.repaint();
             try {
-                adminState = admin_con.createStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM order_list WHERE order_id = " + search_id + " AND user_phone_number = '" + user_phone_number + "'";
                 System.out.println(sql);
                 adminRs = adminState.executeQuery(sql);
@@ -117,7 +110,7 @@ public class myTickets extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -154,8 +147,8 @@ public class myTickets extends JFrame {
                 scrollPane1.revalidate();
                 scrollPane1.repaint();
                 Statement countState;
-                countState = admin_con.createStatement();
-                adminState = admin_con.createStatement();
+                countState = DBUtil.getStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM order_list WHERE " + conditions;
                 String sqlC = "SELECT COUNT(*) FROM order_list WHERE " + conditions;
                 System.out.println(sql);
@@ -225,7 +218,7 @@ public class myTickets extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -255,7 +248,7 @@ public class myTickets extends JFrame {
         Statement trainState;
         int i = 0;
         try {
-            trainState = admin_con.createStatement();
+            trainState = DBUtil.getStatement();
             ResultSet adminRs = trainState.executeQuery("SELECT COUNT(*) FROM order_list WHERE user_phone_number = '" + user_phone_number + "'");
             if (adminRs.next()) {
                 count = adminRs.getInt(1);
@@ -324,7 +317,7 @@ public class myTickets extends JFrame {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (isSelected) {
-                    c.setBackground(Color.YELLOW);
+                    c.setBackground(gray);
                 } else {
                     c.setBackground(table.getBackground());
                 }
@@ -353,7 +346,7 @@ public class myTickets extends JFrame {
             Object[] options = {"确定", "取消"};
             int result = JOptionPane.showOptionDialog(
                     this,
-                    "是否确定删除这张票: " + alter_id + "?",
+                    "是否确定退掉这张票: " + alter_id + "?",
                     "确定操作",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE,
@@ -364,7 +357,7 @@ public class myTickets extends JFrame {
             if (result == JOptionPane.OK_OPTION) {
                 String sql = "DELETE FROM order_list WHERE order_id = " + alter_id;
                 try {
-                    PreparedStatement pstmt = admin_con.prepareStatement(sql);
+                    PreparedStatement pstmt = DBUtil.getPstmt(sql);
                     pstmt.executeUpdate();
                     scrollPane1.setViewportView(null);
                     createUIComponents();
@@ -384,6 +377,7 @@ public class myTickets extends JFrame {
     private JLabel label1;
     private JButton button3;
     private JButton button4;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     private void initComponents() {
@@ -396,45 +390,57 @@ public class myTickets extends JFrame {
         label1 = new JLabel();
         button3 = new JButton();
         button4 = new JButton();
+        button2 = new JButton();
 
         //======== this ========
         setVisible(true);
         var contentPane = getContentPane();
         contentPane.setLayout(null);
         contentPane.add(search_id_input);
-        search_id_input.setBounds(120, 35, 120, search_id_input.getPreferredSize().height);
+        search_id_input.setBounds(130, 20, 120, search_id_input.getPreferredSize().height);
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(30, 85, 955, 600);
+        scrollPane1.setBounds(20, 70, 955, 600);
 
         //---- button1 ----
         button1.setText("\u67e5\u627e");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> Search(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(260, 35), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(265, 15), button1.getPreferredSize()));
 
         //---- label1 ----
         label1.setText("\u8f93\u5165\u8f66\u7968\u7f16\u53f7");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(30, 40), label1.getPreferredSize()));
+        label1.setBounds(new Rectangle(new Point(20, 20), label1.getPreferredSize()));
 
         //---- button3 ----
         button3.setText("\u8fc7\u6ee4\u5668");
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD, button3.getFont().getSize() + 10f));
         button3.addActionListener(e -> Filter(e));
         contentPane.add(button3);
-        button3.setBounds(new Rectangle(new Point(780, 35), button3.getPreferredSize()));
+        button3.setBounds(new Rectangle(new Point(610, 15), button3.getPreferredSize()));
 
         //---- button4 ----
         button4.setText("\u663e\u793a\u5168\u90e8");
+        button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD, button4.getFont().getSize() + 10f));
         button4.addActionListener(e -> ShowAll(e));
         contentPane.add(button4);
-        button4.setBounds(new Rectangle(new Point(900, 35), button4.getPreferredSize()));
+        button4.setBounds(new Rectangle(new Point(740, 15), button4.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(1015, 745));
+        //---- button2 ----
+        button2.setText("\u9000\u7968");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
+        button2.addActionListener(e -> Delete(e));
+        contentPane.add(button2);
+        button2.setBounds(new Rectangle(new Point(890, 15), button2.getPreferredSize()));
+
+        contentPane.setPreferredSize(new Dimension(995, 675));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

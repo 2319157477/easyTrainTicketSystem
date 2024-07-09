@@ -1,4 +1,4 @@
-package page.manage.Train.AdminActions;
+package page.Actions.Train.AdminActions;
 
 import javax.swing.*;
 import java.awt.*;

@@ -2,43 +2,36 @@
  * Created by JFormDesigner on Mon Jul 08 09:02:32 CST 2024
  */
 
-package page.manage.Train.UserActions;
+package page.Actions.Train.UserActions;
 
-import tools.createSeatInfo;
+import sql.DBUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author 23191
  */
 public class purchasePage extends JDialog {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312"; // 替换为你的数据库URL
-    private static final String DB_USER = "root"; // 替换为你的数据库用户名
-    private static final String DB_PASSWORD = "lbc041103"; // 替换为你的数据库密码
     int order_id = 1;
     String phoneNumber;
     String trainId;
     int carriages;
     int carriage_id = 0;
     int selectSeat = 0;
+    boolean isP = false;
     String start_station;
     String end_station;
     String start_date;
     int t_price;
-    Connection conn;
     public purchasePage(JFrame owner, String id, String phoneNumber) {
         super(owner, "购买车票", true);
         this.phoneNumber = phoneNumber;
         trainId = id;
         try {
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            Statement pState = conn.createStatement();
+            Statement pState = DBUtil.getStatement();
             String sql = "SELECT COUNT(*) FROM order_list";
             ResultSet rs2 = pState.executeQuery(sql);
             if (rs2.next()) {
@@ -64,8 +57,13 @@ public class purchasePage extends JDialog {
         carriage_id = comboBox1.getSelectedIndex() + 1;
         TrainSeatDialog seatDialog = new TrainSeatDialog(this, trainId, carriage_id);
         selectSeat = seatDialog.getSelectedSeat();
+        isP = seatDialog.getPurchaseStat();
         t_price = (carriage_id <= 2)? 500 : 300;
-        price.setText("价格 :" + t_price);
+        if (selectSeat != -1 && isP) {
+            price.setText("价格 :" + t_price);
+            price.repaint();
+            price.setVisible(true);
+        }
     }
 
     private void setComponents() {
@@ -75,11 +73,11 @@ public class purchasePage extends JDialog {
         start_end.setText(text);
     }
     private void SureButton(ActionEvent e) {
-        if (carriage_id != 0 && selectSeat != 0) {
+        if (carriage_id != 0 && selectSeat != 0 && isP) {
             String sql = "INSERT INTO order_list (order_id, user_phone_number, train_id, start_station_name, end_station_name, carriage_id, seat_id, order_money, train_start_date) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try {
-                PreparedStatement ptmt = conn.prepareStatement(sql);
+                PreparedStatement ptmt = DBUtil.getPstmt(sql);
                 {
                     ptmt.setInt(1, order_id);
                     ptmt.setString(2, phoneNumber);
@@ -92,6 +90,8 @@ public class purchasePage extends JDialog {
                     ptmt.setString(9, start_date);
                     int rowsAffected = ptmt.executeUpdate();
                     System.out.println("Inserted " + rowsAffected + " row(s).");
+                    JOptionPane.showMessageDialog(this, "购票成功！");
+                    dispose();
                 }
                 
             } catch (SQLException ex) {
@@ -115,43 +115,55 @@ public class purchasePage extends JDialog {
         setComponents();
 
         //======== this ========
+        setTitle("\u8d2d\u4e70\u8f66\u7968");
         var contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //---- label1 ----
         label1.setText("\u5f53\u524d\u6d4f\u89c8\u5217\u8f66\uff1a");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(30, 20), label1.getPreferredSize()));
+        label1.setBounds(new Rectangle(new Point(25, 20), label1.getPreferredSize()));
+
+        //---- c_trainId ----
+        c_trainId.setFont(c_trainId.getFont().deriveFont(c_trainId.getFont().getStyle() | Font.BOLD, c_trainId.getFont().getSize() + 5f));
         contentPane.add(c_trainId);
-        c_trainId.setBounds(new Rectangle(new Point(125, 20), c_trainId.getPreferredSize()));
+        c_trainId.setBounds(145, 20, 70, c_trainId.getPreferredSize().height);
+
+        //---- start_end ----
+        start_end.setFont(start_end.getFont().deriveFont(start_end.getFont().getStyle() | Font.BOLD, start_end.getFont().getSize() + 5f));
         contentPane.add(start_end);
-        start_end.setBounds(new Rectangle(new Point(30, 50), start_end.getPreferredSize()));
+        start_end.setBounds(new Rectangle(new Point(25, 60), start_end.getPreferredSize()));
 
         //---- label4 ----
         label4.setText("\u9009\u62e9\u8f66\u53a2");
+        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD, label4.getFont().getSize() + 5f));
         contentPane.add(label4);
-        label4.setBounds(new Rectangle(new Point(30, 95), label4.getPreferredSize()));
+        label4.setBounds(new Rectangle(new Point(25, 95), label4.getPreferredSize()));
         contentPane.add(comboBox1);
-        comboBox1.setBounds(new Rectangle(new Point(105, 90), comboBox1.getPreferredSize()));
+        comboBox1.setBounds(new Rectangle(new Point(110, 95), comboBox1.getPreferredSize()));
 
         //---- chooseSeat ----
         chooseSeat.setText("\u9009\u62e9\u5ea7\u4f4d");
+        chooseSeat.setFont(chooseSeat.getFont().deriveFont(chooseSeat.getFont().getStyle() | Font.BOLD, chooseSeat.getFont().getSize() + 10f));
         chooseSeat.addActionListener(e -> chooseSeat(e));
         contentPane.add(chooseSeat);
-        chooseSeat.setBounds(new Rectangle(new Point(25, 145), chooseSeat.getPreferredSize()));
+        chooseSeat.setBounds(new Rectangle(new Point(20, 140), chooseSeat.getPreferredSize()));
 
         //---- button1 ----
         button1.setText("\u786e\u5b9a\u8d2d\u7968");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> SureButton(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(25, 210), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(20, 200), button1.getPreferredSize()));
 
         //---- price ----
-        price.setText("\u4ef7\u683c");
+        price.setFont(price.getFont().deriveFont(price.getFont().getStyle() | Font.BOLD, price.getFont().getSize() + 5f));
+        price.setText(" ");
         contentPane.add(price);
-        price.setBounds(125, 150, 70, price.getPreferredSize().height);
+        price.setBounds(160, 145, 85, price.getPreferredSize().height);
 
-        contentPane.setPreferredSize(new Dimension(470, 355));
+        contentPane.setPreferredSize(new Dimension(270, 260));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

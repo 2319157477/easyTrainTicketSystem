@@ -2,9 +2,9 @@
  * Created by JFormDesigner on Sat Jul 06 22:20:45 CST 2024
  */
 
-package page.manage.Ticket.AdminAction;
+package page.Actions.Ticket.AdminAction;
 
-import page.manage.Train.AdminActions.DateSystem;
+import page.Actions.Train.AdminActions.DateSystem;
 import tools.FormattedTime;
 
 import javax.swing.*;
@@ -131,73 +131,84 @@ public class searchPage extends JDialog {
 
         //---- label1 ----
         label1.setText("\u5217\u8f66\u7f16\u53f7");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(25, 25), label1.getPreferredSize()));
+        label1.setBounds(new Rectangle(new Point(20, 20), label1.getPreferredSize()));
 
         //---- label3 ----
         label3.setText("\u53d1\u8f66\u65f6\u95f4");
+        label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD, label3.getFont().getSize() + 5f));
         contentPane.add(label3);
-        label3.setBounds(new Rectangle(new Point(25, 125), label3.getPreferredSize()));
+        label3.setBounds(new Rectangle(new Point(20, 125), label3.getPreferredSize()));
 
         //---- label5 ----
         label5.setText("\u8d77\u70b9\u7ad9");
+        label5.setFont(label5.getFont().deriveFont(label5.getFont().getStyle() | Font.BOLD, label5.getFont().getSize() + 5f));
         contentPane.add(label5);
-        label5.setBounds(new Rectangle(new Point(25, 165), label5.getPreferredSize()));
+        label5.setBounds(new Rectangle(new Point(20, 165), label5.getPreferredSize()));
 
         //---- label6 ----
         label6.setText("\u7ec8\u70b9\u7ad9");
+        label6.setFont(label6.getFont().deriveFont(label6.getFont().getStyle() | Font.BOLD, label6.getFont().getSize() + 5f));
         contentPane.add(label6);
-        label6.setBounds(new Rectangle(new Point(25, 205), label6.getPreferredSize()));
+        label6.setBounds(new Rectangle(new Point(20, 205), label6.getPreferredSize()));
 
         //---- radioButton1 ----
         radioButton1.setText("\u4e00\u7b49");
+        radioButton1.setFont(radioButton1.getFont().deriveFont(radioButton1.getFont().getStyle() | Font.BOLD, radioButton1.getFont().getSize() + 5f));
         radioButton1.addActionListener(e -> pukuai(e));
         contentPane.add(radioButton1);
-        radioButton1.setBounds(new Rectangle(new Point(105, 95), radioButton1.getPreferredSize()));
+        radioButton1.setBounds(new Rectangle(new Point(105, 90), radioButton1.getPreferredSize()));
 
         //---- radioButton2 ----
         radioButton2.setText("\u4e8c\u7b49");
+        radioButton2.setFont(radioButton2.getFont().deriveFont(radioButton2.getFont().getStyle() | Font.BOLD, radioButton2.getFont().getSize() + 5f));
         radioButton2.addActionListener(e -> gaotie(e));
         contentPane.add(radioButton2);
-        radioButton2.setBounds(new Rectangle(new Point(185, 95), radioButton2.getPreferredSize()));
+        radioButton2.setBounds(new Rectangle(new Point(185, 90), radioButton2.getPreferredSize()));
         contentPane.add(start_station);
-        start_station.setBounds(105, 160, 130, start_station.getPreferredSize().height);
+        start_station.setBounds(105, 165, 130, start_station.getPreferredSize().height);
         contentPane.add(end_station);
-        end_station.setBounds(105, 200, 130, end_station.getPreferredSize().height);
+        end_station.setBounds(105, 205, 130, end_station.getPreferredSize().height);
 
         //---- button1 ----
         button1.setText("\u641c\u7d22");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> Search(e));
         contentPane.add(button1);
         button1.setBounds(new Rectangle(new Point(20, 250), button1.getPreferredSize()));
 
         //---- button2 ----
         button2.setText("\u8fd4\u56de");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
         button2.addActionListener(e -> exit(e));
         contentPane.add(button2);
-        button2.setBounds(new Rectangle(new Point(150, 250), button2.getPreferredSize()));
+        button2.setBounds(new Rectangle(new Point(155, 250), button2.getPreferredSize()));
 
         //---- button3 ----
         button3.setText("\u9009\u62e9\u65e5\u671f\u65f6\u95f4");
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD, button3.getFont().getSize() + 1f));
         button3.addActionListener(e -> DateSelect(e));
         contentPane.add(button3);
-        button3.setBounds(105, 120, 130, button3.getPreferredSize().height);
+        button3.setBounds(105, 125, 130, button3.getPreferredSize().height);
         contentPane.add(trainIdInput);
-        trainIdInput.setBounds(105, 20, 125, trainIdInput.getPreferredSize().height);
+        trainIdInput.setBounds(105, 20, 130, trainIdInput.getPreferredSize().height);
 
         //---- label4 ----
         label4.setText("\u7968\u578b");
+        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD, label4.getFont().getSize() + 5f));
         contentPane.add(label4);
-        label4.setBounds(new Rectangle(new Point(25, 95), label4.getPreferredSize()));
+        label4.setBounds(new Rectangle(new Point(20, 90), label4.getPreferredSize()));
 
         //---- label8 ----
         label8.setText("\u7528\u6237\u7535\u8bdd");
+        label8.setFont(label8.getFont().deriveFont(label8.getFont().getStyle() | Font.BOLD, label8.getFont().getSize() + 5f));
         contentPane.add(label8);
-        label8.setBounds(new Rectangle(new Point(25, 60), label8.getPreferredSize()));
+        label8.setBounds(new Rectangle(new Point(20, 55), label8.getPreferredSize()));
         contentPane.add(phoneInput);
-        phoneInput.setBounds(105, 60, 125, phoneInput.getPreferredSize().height);
+        phoneInput.setBounds(105, 55, 130, phoneInput.getPreferredSize().height);
 
-        contentPane.setPreferredSize(new Dimension(265, 325));
+        contentPane.setPreferredSize(new Dimension(255, 305));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

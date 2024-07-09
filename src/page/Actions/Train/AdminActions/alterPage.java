@@ -2,8 +2,9 @@
  * Created by JFormDesigner on Sat Jul 06 22:20:56 CST 2024
  */
 
-package page.manage.Train.AdminActions;
+package page.Actions.Train.AdminActions;
 
+import sql.DBUtil;
 import tools.FormattedTime;
 
 import java.awt.*;
@@ -15,11 +16,6 @@ import javax.swing.*;
  * @author 23191
  */
 public class alterPage extends JDialog {
-
-    String url = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312";
-    String user = "root";
-    String password = "lbc041103";
-    Connection alter_con;
     Statement alterState;
     PreparedStatement pstmt = null;
     String c_id;
@@ -34,9 +30,8 @@ public class alterPage extends JDialog {
     public alterPage(String alter_id, JFrame parent) {
         super(parent, "修改列车信息", true);
         try {
-            alter_con = DriverManager.getConnection(url, user, password);
             //System.out.println("成功连接!");
-            alterState = alter_con.createStatement();
+            alterState = DBUtil.getStatement();
             String sql = "SELECT * FROM train_info WHERE train_id = '" + alter_id + "'";
             //System.out.println(sql);
             ResultSet rs1 = alterState.executeQuery(sql);
@@ -69,7 +64,7 @@ public class alterPage extends JDialog {
         String sql = "UPDATE train_info SET train_type = ?, train_carriage = ?, train_start_station = ?, train_end_station = ?, train_start_time = ?, train_end_time = ?, train_arrive_day = ? WHERE train_id = '" + c_id + "'";
         System.out.println(sql);
         try {
-            pstmt = alter_con.prepareStatement(sql);
+            pstmt = DBUtil.getPstmt(sql);
 
             pstmt.setString(1, a_type);
             pstmt.setInt(2, a_carriages);
@@ -125,6 +120,10 @@ public class alterPage extends JDialog {
         arriveDay.setSelectedItem(time.getFormattedDay(c_arrive_day, "D"));
         alter_id.setText(c_id);
     }
+
+    private void exit(ActionEvent e) {
+        dispose();
+    }
     private void initComponents(String id) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         label1 = new JLabel();
@@ -154,6 +153,7 @@ public class alterPage extends JDialog {
         label14 = new JLabel();
         label15 = new JLabel();
         createUIComponents();
+        button2 = new JButton();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -162,103 +162,128 @@ public class alterPage extends JDialog {
 
         //---- label1 ----
         label1.setText("\u5f53\u524d\u4fee\u6539\u5217\u8f66\u7f16\u53f7:");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
         label1.setBounds(new Rectangle(new Point(20, 15), label1.getPreferredSize()));
 
         //---- label2 ----
         label2.setText("\u5217\u8f66\u7c7b\u578b");
+        label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD, label2.getFont().getSize() + 5f));
         contentPane.add(label2);
         label2.setBounds(new Rectangle(new Point(20, 50), label2.getPreferredSize()));
         contentPane.add(typeCBox);
-        typeCBox.setBounds(new Rectangle(new Point(115, 45), typeCBox.getPreferredSize()));
+        typeCBox.setBounds(new Rectangle(new Point(115, 50), typeCBox.getPreferredSize()));
 
         //---- label3 ----
         label3.setText("\u5217\u8f66\u8f66\u53a2\u6570");
+        label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD, label3.getFont().getSize() + 5f));
         contentPane.add(label3);
         label3.setBounds(new Rectangle(new Point(20, 90), label3.getPreferredSize()));
         contentPane.add(Carriages);
-        Carriages.setBounds(115, 85, 75, Carriages.getPreferredSize().height);
+        Carriages.setBounds(115, 90, 75, Carriages.getPreferredSize().height);
 
         //---- label4 ----
         label4.setText("\u59cb\u53d1\u7ad9");
+        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD, label4.getFont().getSize() + 5f));
         contentPane.add(label4);
         label4.setBounds(new Rectangle(new Point(20, 130), label4.getPreferredSize()));
 
         //---- label5 ----
         label5.setText("\u7ec8\u70b9\u7ad9");
+        label5.setFont(label5.getFont().deriveFont(label5.getFont().getStyle() | Font.BOLD, label5.getFont().getSize() + 5f));
         contentPane.add(label5);
         label5.setBounds(new Rectangle(new Point(20, 175), label5.getPreferredSize()));
         contentPane.add(start_station);
-        start_station.setBounds(115, 125, 75, start_station.getPreferredSize().height);
+        start_station.setBounds(115, 130, 75, start_station.getPreferredSize().height);
         contentPane.add(end_station);
-        end_station.setBounds(115, 170, 75, end_station.getPreferredSize().height);
+        end_station.setBounds(115, 175, 75, end_station.getPreferredSize().height);
 
         //---- label6 ----
         label6.setText("\u53d1\u8f66\u65f6\u95f4");
+        label6.setFont(label6.getFont().deriveFont(label6.getFont().getStyle() | Font.BOLD, label6.getFont().getSize() + 5f));
         contentPane.add(label6);
-        label6.setBounds(new Rectangle(new Point(250, 50), label6.getPreferredSize()));
+        label6.setBounds(new Rectangle(new Point(215, 50), label6.getPreferredSize()));
 
         //---- label7 ----
         label7.setText("\u5230\u7ad9\u65f6\u95f4");
+        label7.setFont(label7.getFont().deriveFont(label7.getFont().getStyle() | Font.BOLD, label7.getFont().getSize() + 5f));
         contentPane.add(label7);
-        label7.setBounds(new Rectangle(new Point(250, 90), label7.getPreferredSize()));
+        label7.setBounds(new Rectangle(new Point(215, 90), label7.getPreferredSize()));
         contentPane.add(end_h);
-        end_h.setBounds(330, 85, 65, end_h.getPreferredSize().height);
+        end_h.setBounds(295, 90, 65, end_h.getPreferredSize().height);
 
         //---- label8 ----
         label8.setText("\u65f6");
+        label8.setFont(label8.getFont().deriveFont(label8.getFont().getStyle() | Font.BOLD, label8.getFont().getSize() + 5f));
         contentPane.add(label8);
-        label8.setBounds(405, 90, 15, 17);
+        label8.setBounds(new Rectangle(new Point(370, 90), label8.getPreferredSize()));
         contentPane.add(end_m);
-        end_m.setBounds(430, 85, 65, end_m.getPreferredSize().height);
+        end_m.setBounds(395, 90, 65, end_m.getPreferredSize().height);
 
         //---- label9 ----
         label9.setText("\u5206");
+        label9.setFont(label9.getFont().deriveFont(label9.getFont().getStyle() | Font.BOLD, label9.getFont().getSize() + 5f));
         contentPane.add(label9);
-        label9.setBounds(new Rectangle(new Point(510, 90), label9.getPreferredSize()));
+        label9.setBounds(new Rectangle(new Point(470, 90), label9.getPreferredSize()));
         contentPane.add(start_m);
-        start_m.setBounds(430, 45, 65, 30);
+        start_m.setBounds(395, 50, 65, 30);
         contentPane.add(start_h);
-        start_h.setBounds(330, 45, 65, 30);
+        start_h.setBounds(295, 50, 65, 30);
 
         //---- label10 ----
         label10.setText("\u65f6");
+        label10.setFont(label10.getFont().deriveFont(label10.getFont().getStyle() | Font.BOLD, label10.getFont().getSize() + 5f));
         contentPane.add(label10);
-        label10.setBounds(405, 50, 15, 17);
+        label10.setBounds(new Rectangle(new Point(370, 50), label10.getPreferredSize()));
 
         //---- label11 ----
         label11.setText("\u5206");
+        label11.setFont(label11.getFont().deriveFont(label11.getFont().getStyle() | Font.BOLD, label11.getFont().getSize() + 5f));
         contentPane.add(label11);
-        label11.setBounds(510, 50, 13, 17);
+        label11.setBounds(new Rectangle(new Point(470, 50), label11.getPreferredSize()));
 
         //---- label12 ----
         label12.setText("\u53d1\u8f66\u65e5\u671f");
+        label12.setFont(label12.getFont().deriveFont(label12.getFont().getStyle() | Font.BOLD, label12.getFont().getSize() + 5f));
         contentPane.add(label12);
-        label12.setBounds(new Rectangle(new Point(250, 130), label12.getPreferredSize()));
+        label12.setBounds(new Rectangle(new Point(215, 130), label12.getPreferredSize()));
 
         //---- button1 ----
         button1.setText("\u786e\u5b9a");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> SureButton(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(235, 235), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(155, 225), button1.getPreferredSize()));
+
+        //---- alter_id ----
+        alter_id.setFont(alter_id.getFont().deriveFont(alter_id.getFont().getStyle() | Font.BOLD, alter_id.getFont().getSize() + 5f));
         contentPane.add(alter_id);
-        alter_id.setBounds(140, 15, 50, alter_id.getPreferredSize().height);
+        alter_id.setBounds(new Rectangle(new Point(170, 15), alter_id.getPreferredSize()));
         contentPane.add(arriveMonth);
-        arriveMonth.setBounds(330, 125, 65, 30);
+        arriveMonth.setBounds(295, 130, 65, 30);
         contentPane.add(arriveDay);
-        arriveDay.setBounds(430, 125, 65, 30);
+        arriveDay.setBounds(395, 130, 65, 30);
 
         //---- label14 ----
         label14.setText("\u6708");
+        label14.setFont(label14.getFont().deriveFont(label14.getFont().getStyle() | Font.BOLD, label14.getFont().getSize() + 5f));
         contentPane.add(label14);
-        label14.setBounds(new Rectangle(new Point(405, 130), label14.getPreferredSize()));
+        label14.setBounds(new Rectangle(new Point(370, 130), label14.getPreferredSize()));
 
         //---- label15 ----
         label15.setText("\u65e5");
+        label15.setFont(label15.getFont().deriveFont(label15.getFont().getStyle() | Font.BOLD, label15.getFont().getSize() + 5f));
         contentPane.add(label15);
-        label15.setBounds(new Rectangle(new Point(510, 130), label15.getPreferredSize()));
+        label15.setBounds(new Rectangle(new Point(470, 130), label15.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(550, 340));
+        //---- button2 ----
+        button2.setText("\u8fd4\u56de");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
+        button2.addActionListener(e -> exit(e));
+        contentPane.add(button2);
+        button2.setBounds(new Rectangle(new Point(270, 225), button2.getPreferredSize()));
+
+        contentPane.setPreferredSize(new Dimension(505, 280));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -291,5 +316,6 @@ public class alterPage extends JDialog {
     private JComboBox arriveDay;
     private JLabel label14;
     private JLabel label15;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

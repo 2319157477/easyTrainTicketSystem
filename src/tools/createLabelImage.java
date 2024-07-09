@@ -2,8 +2,8 @@ package tools;
 
 import javax.swing.*;
 import java.awt.Image;
-public class createImage {
-    public createImage (JLabel label, String filename) {
+public class createLabelImage {
+    public createLabelImage(JLabel label, String filename) {
         int width = label.getWidth();
         int height = label.getHeight();
         String file = "D:\\Code\\java\\TrainTicketSystem\\Images\\" + filename;

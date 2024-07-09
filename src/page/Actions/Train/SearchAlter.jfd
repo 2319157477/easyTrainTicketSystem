@@ -8,11 +8,12 @@ new FormModel {
 		} ) {
 			name: "this"
 			"visible": true
+			"title": "列车管理"
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "search_id_input"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 95
-				"y": 35
+				"y": 20
 				"width": 120
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -24,77 +25,85 @@ new FormModel {
 					}
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 35
-				"y": 95
+				"x": 20
+				"y": 65
 				"width": 955
 				"height": 615
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "查找"
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Search", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 225
-				"y": 35
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "修改"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Alter", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 550
-				"y": 35
+				"x": 595
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "输入编号"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 5, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 35
-				"y": 40
+				"x": 20
+				"y": 20
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button3"
 				"text": "过滤器"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Filter", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 330
-				"y": 35
+				"x": 355
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button4"
 				"text": "显示全部"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ShowAll", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 430
-				"y": 35
+				"x": 465
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button5"
 				"text": "删除"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Delete", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 800
-				"y": 35
+				"x": 810
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button6"
 				"text": "添加"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Add", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 915
-				"y": 35
+				"x": 895
+				"y": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button7"
 				"text": "查看详情"
+				"font": #SwingDerivedFont0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "moreInfo", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 670
-				"y": 35
+				"x": 680
+				"y": 15
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 75, 0 )
-			"size": new java.awt.Dimension( 1025, 780 )
+			"size": new java.awt.Dimension( 995, 700 )
 		} )
 	}
 }

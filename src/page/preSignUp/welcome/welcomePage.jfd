@@ -11,43 +11,49 @@ new FormModel {
 			"visible": true
 			"defaultCloseOperation": 3
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "denglu"
+				name: "LogIn"
 				"text": "用户登录"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "dengluUser", true ) )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logInUser", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 225
-				"y": 250
+				"x": 210
+				"y": 270
+				"width": 130
+				"height": 40
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 35
-				"y": 20
+				"x": 30
+				"y": 15
 				"width": 310
-				"height": 215
+				"height": 240
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"enabled": false
 				"visible": false
 				auxiliary() {
-					"JavaCodeGenerator.preInitCode": "new createImage(label1, \"zhongtie.png\");"
+					"JavaCodeGenerator.preInitCode": "new createLabelImage(label1, \"zhongtie.png\");"
 				}
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 20
 				"y": 20
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "zhuce"
+				name: "SignUp"
 				"text": "注册用户"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "zhuceUser", true ) )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "signUpUser", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 60
-				"y": 250
+				"x": 30
+				"y": 270
+				"width": 130
+				"height": 40
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 380, 300 )
+			"size": new java.awt.Dimension( 375, 325 )
 		} )
 	}
 }

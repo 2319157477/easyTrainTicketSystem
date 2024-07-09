@@ -2,9 +2,10 @@
  * Created by JFormDesigner on Sat Jul 06 19:51:40 CST 2024
  */
 
-package page.manage.User;
+package page.Actions.User;
 
-import page.manage.User.AdminActions.*;
+import page.Actions.User.AdminActions.*;
+import sql.DBUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,10 +19,6 @@ import java.sql.*;
  * @author 23191
  */
 public class SearchAlter_User extends JFrame {
-    String url = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312";
-    String username = "root";
-    String password = "lbc041103";
-    Connection admin_con;
     String alter_id = "";
     Statement adminState;
     ResultSet adminRs;
@@ -34,15 +31,10 @@ public class SearchAlter_User extends JFrame {
     int c_gender;
     String userType;
     String userGender;
-    
+    Color gray = new Color(54, 54, 54);
     String[] columnNames =
             {"号码", "密码", "姓名", "类型", "性别"};
     public SearchAlter_User() {
-        try {
-            admin_con = DriverManager.getConnection(url, username, password);
-        } catch (SQLException var10) {
-            throw new RuntimeException(var10);
-        }
         initComponents();
     }
     private void Alter(ActionEvent e) {
@@ -61,7 +53,7 @@ public class SearchAlter_User extends JFrame {
             scrollPane1.revalidate();
             scrollPane1.repaint();
             try {
-                adminState = admin_con.createStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM user WHERE user_phone = '" + search_id + "'";
                 System.out.println(sql);
                 adminRs = adminState.executeQuery(sql);
@@ -109,7 +101,7 @@ public class SearchAlter_User extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -145,8 +137,8 @@ public class SearchAlter_User extends JFrame {
                 scrollPane1.revalidate();
                 scrollPane1.repaint();
                 Statement countState;
-                countState = admin_con.createStatement();
-                adminState = admin_con.createStatement();
+                countState = DBUtil.getStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM user WHERE " + conditions;
                 String sqlC = "SELECT COUNT(*) FROM user WHERE " + conditions;
                 System.out.println(sql);
@@ -204,7 +196,7 @@ public class SearchAlter_User extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -230,11 +222,10 @@ public class SearchAlter_User extends JFrame {
         }
     }
     private void createUIComponents() {
-        //table1 = new JTable() ;
         Statement trainState;
         int i = 0;
         try {
-            trainState = admin_con.createStatement();
+            trainState = DBUtil.getStatement();
             ResultSet adminRs = trainState.executeQuery("SELECT COUNT(*) FROM user");
             if (adminRs.next()) {
                 count = adminRs.getInt(1);
@@ -291,7 +282,7 @@ public class SearchAlter_User extends JFrame {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (isSelected) {
-                    c.setBackground(Color.YELLOW);
+                    c.setBackground(gray);
                 } else {
                     c.setBackground(table.getBackground());
                 }
@@ -331,7 +322,7 @@ public class SearchAlter_User extends JFrame {
             if (result == JOptionPane.OK_OPTION) {
                 String sql = "DELETE FROM user WHERE user_phone = '" + alter_id + "'";
                 try {
-                    PreparedStatement pstmt = admin_con.prepareStatement(sql);
+                    PreparedStatement pstmt = DBUtil.getPstmt(sql);;
                     pstmt.executeUpdate();
                     scrollPane1.setViewportView(null);
                     createUIComponents();
@@ -378,52 +369,60 @@ public class SearchAlter_User extends JFrame {
 
         //======== this ========
         setVisible(true);
+        setTitle("\u7528\u6237\u7ba1\u7406");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         var contentPane = getContentPane();
         contentPane.setLayout(null);
         contentPane.add(search_id_input);
-        search_id_input.setBounds(235, 35, 120, search_id_input.getPreferredSize().height);
+        search_id_input.setBounds(135, 25, 120, search_id_input.getPreferredSize().height);
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(140, 125, 955, 600);
+        scrollPane1.setBounds(20, 75, 955, 600);
 
         //---- button1 ----
         button1.setText("\u67e5\u627e");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> Search(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(365, 35), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(275, 20), button1.getPreferredSize()));
 
         //---- button2 ----
         button2.setText("\u4fee\u6539");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
         button2.addActionListener(e -> Alter(e));
         contentPane.add(button2);
-        button2.setBounds(new Rectangle(new Point(760, 35), button2.getPreferredSize()));
+        button2.setBounds(new Rectangle(new Point(785, 20), button2.getPreferredSize()));
 
         //---- label1 ----
         label1.setText("\u8f93\u5165\u7535\u8bdd\u53f7\u7801");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(145, 40), label1.getPreferredSize()));
+        label1.setBounds(new Rectangle(new Point(20, 25), label1.getPreferredSize()));
 
         //---- button3 ----
         button3.setText("\u8fc7\u6ee4\u5668");
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD, button3.getFont().getSize() + 10f));
         button3.addActionListener(e -> Filter(e));
         contentPane.add(button3);
-        button3.setBounds(new Rectangle(new Point(495, 35), button3.getPreferredSize()));
+        button3.setBounds(new Rectangle(new Point(490, 20), button3.getPreferredSize()));
 
         //---- button4 ----
         button4.setText("\u663e\u793a\u5168\u90e8");
+        button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD, button4.getFont().getSize() + 11f));
         button4.addActionListener(e -> ShowAll(e));
         contentPane.add(button4);
-        button4.setBounds(new Rectangle(new Point(625, 35), button4.getPreferredSize()));
+        button4.setBounds(new Rectangle(new Point(625, 20), button4.getPreferredSize()));
 
         //---- button5 ----
         button5.setText("\u5220\u9664");
+        button5.setFont(button5.getFont().deriveFont(button5.getFont().getStyle() | Font.BOLD, button5.getFont().getSize() + 10f));
         button5.addActionListener(e -> Delete(e));
         contentPane.add(button5);
-        button5.setBounds(new Rectangle(new Point(890, 35), button5.getPreferredSize()));
+        button5.setBounds(new Rectangle(new Point(895, 20), button5.getPreferredSize()));
 
         //---- button6 ----
         button6.setText("\u6dfb\u52a0");
@@ -431,7 +430,7 @@ public class SearchAlter_User extends JFrame {
         contentPane.add(button6);
         button6.setBounds(new Rectangle(new Point(1020, 35), button6.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(1250, 885));
+        contentPane.setPreferredSize(new Dimension(995, 700));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

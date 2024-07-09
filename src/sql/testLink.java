@@ -18,7 +18,7 @@ public class testLink { // 创建类Conn
         user = "root";//数据库登录名
         password = "lbc041103";//密码
         try { // 通过访问数据库的URL获取数据库连接对象
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=gbk", user, password);
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/train_station?useUnicode=true&characterEncoding=gbk", user, password);
             System.out.println("数据库连接成功");
         } catch (SQLException e) {
             e.printStackTrace();

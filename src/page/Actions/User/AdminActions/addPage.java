@@ -2,7 +2,9 @@
  * Created by JFormDesigner on Sun Jul 07 22:22:38 CST 2024
  */
 
-package page.manage.User.AdminActions;
+package page.Actions.User.AdminActions;
+
+import sql.DBUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +17,6 @@ import java.sql.*;
  * @author 23191
  */
 public class addPage extends JDialog {
-    String url = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312";
-    String user = "root";
-    String password = "lbc041103";
     String phone = "";
     String pwd = "";
     String name = "";
@@ -28,8 +27,6 @@ public class addPage extends JDialog {
     // SQL 插入语句
     String sql = "INSERT INTO user (user_phone, user_pwd, user_name, user_type, user_gender) " +
             "VALUES (?, ?, ?, ?, ?)";
-    Connection conn;
-
     private static boolean areAllFieldsNonEmpty(String... fields) {
         for (String field : fields) {
             if (field == null || field.isEmpty()) {
@@ -40,12 +37,6 @@ public class addPage extends JDialog {
     }
     public addPage(JFrame owner) {
         super(owner, "添加用户", true);
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         initComponents();
         setVisible(true);
     }
@@ -60,7 +51,7 @@ public class addPage extends JDialog {
         boolean allFieldsNonEmpty = areAllFieldsNonEmpty(phone, pwd, name);
         if (allFieldsNonEmpty && userType != 2 && userGender != 2) {
             try {
-                PreparedStatement stmt = conn.prepareStatement(sql);
+                PreparedStatement stmt = DBUtil.getPstmt(sql);
                 {
                     // 设置参数
                     stmt.setString(1, phone);
@@ -85,7 +76,7 @@ public class addPage extends JDialog {
         phone = idInput.getText();
         boolean isSame = false;
         try {
-            Statement usernameState = conn.createStatement();
+            Statement usernameState = DBUtil.getStatement();
             ResultSet rs = usernameState.executeQuery("SELECT * FROM user");
             //System.out.println("成功连接！");
             while (rs.next()) {
@@ -125,6 +116,10 @@ public class addPage extends JDialog {
     private void woman_G(ActionEvent e) {
         userGender = 0;
     }
+
+    private void exit(ActionEvent e) {
+        dispose();
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         label1 = new JLabel();
@@ -148,6 +143,7 @@ public class addPage extends JDialog {
         g1.add(radioButtonDefault);
         radioButtonAdmin = new JRadioButton();
         g1.add(radioButtonAdmin);
+        button2 = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -155,28 +151,32 @@ public class addPage extends JDialog {
 
         //---- label1 ----
         label1.setText("\u7528\u6237\u53f7\u7801");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(20, 60, 60, 17);
+        label1.setBounds(new Rectangle(new Point(20, 20), label1.getPreferredSize()));
 
         //---- label3 ----
         label3.setText("\u7528\u6237\u5bc6\u7801");
+        label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD, label3.getFont().getSize() + 5f));
         contentPane.add(label3);
-        label3.setBounds(20, 95, 65, 17);
+        label3.setBounds(new Rectangle(new Point(20, 60), label3.getPreferredSize()));
         contentPane.add(pwdInput);
-        pwdInput.setBounds(115, 90, 130, 30);
+        pwdInput.setBounds(105, 60, 130, 30);
 
         //---- label4 ----
         label4.setText("\u7528\u6237\u59d3\u540d");
+        label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD, label4.getFont().getSize() + 5f));
         contentPane.add(label4);
-        label4.setBounds(20, 135, 60, 17);
+        label4.setBounds(new Rectangle(new Point(20, 105), label4.getPreferredSize()));
         contentPane.add(nameInput);
-        nameInput.setBounds(115, 130, 130, 30);
+        nameInput.setBounds(105, 105, 130, 30);
 
         //---- button1 ----
         button1.setText("\u786e\u5b9a");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> SureButton(e));
         contentPane.add(button1);
-        button1.setBounds(225, 190, 78, 30);
+        button1.setBounds(new Rectangle(new Point(140, 155), button1.getPreferredSize()));
 
         //---- idInput ----
         idInput.addFocusListener(new FocusAdapter() {
@@ -186,7 +186,7 @@ public class addPage extends JDialog {
             }
         });
         contentPane.add(idInput);
-        idInput.setBounds(115, 55, 130, idInput.getPreferredSize().height);
+        idInput.setBounds(105, 20, 130, idInput.getPreferredSize().height);
 
         //---- idErr ----
         idErr.setText("\u5df2\u5b58\u5728\uff01");
@@ -196,39 +196,52 @@ public class addPage extends JDialog {
 
         //---- label2 ----
         label2.setText("\u7528\u6237\u7c7b\u578b");
+        label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD, label2.getFont().getSize() + 5f));
         contentPane.add(label2);
-        label2.setBounds(new Rectangle(new Point(290, 75), label2.getPreferredSize()));
+        label2.setBounds(new Rectangle(new Point(265, 20), label2.getPreferredSize()));
 
         //---- label5 ----
         label5.setText("\u7528\u6237\u6027\u522b");
+        label5.setFont(label5.getFont().deriveFont(label5.getFont().getStyle() | Font.BOLD, label5.getFont().getSize() + 5f));
         contentPane.add(label5);
-        label5.setBounds(new Rectangle(new Point(290, 125), label5.getPreferredSize()));
+        label5.setBounds(new Rectangle(new Point(265, 60), label5.getPreferredSize()));
 
         //---- radioButtonMan ----
         radioButtonMan.setText("\u7537");
+        radioButtonMan.setFont(radioButtonMan.getFont().deriveFont(radioButtonMan.getFont().getStyle() | Font.BOLD, radioButtonMan.getFont().getSize() + 5f));
         radioButtonMan.addActionListener(e -> man_G(e));
         contentPane.add(radioButtonMan);
-        radioButtonMan.setBounds(new Rectangle(new Point(355, 125), radioButtonMan.getPreferredSize()));
+        radioButtonMan.setBounds(new Rectangle(new Point(345, 60), radioButtonMan.getPreferredSize()));
 
         //---- radioButtonWoman ----
         radioButtonWoman.setText("\u5973");
+        radioButtonWoman.setFont(radioButtonWoman.getFont().deriveFont(radioButtonWoman.getFont().getStyle() | Font.BOLD, radioButtonWoman.getFont().getSize() + 5f));
         radioButtonWoman.addActionListener(e -> woman_G(e));
         contentPane.add(radioButtonWoman);
-        radioButtonWoman.setBounds(new Rectangle(new Point(420, 125), radioButtonWoman.getPreferredSize()));
+        radioButtonWoman.setBounds(new Rectangle(new Point(415, 60), radioButtonWoman.getPreferredSize()));
 
         //---- radioButtonDefault ----
         radioButtonDefault.setText("\u666e\u901a");
+        radioButtonDefault.setFont(radioButtonDefault.getFont().deriveFont(radioButtonDefault.getFont().getStyle() | Font.BOLD, radioButtonDefault.getFont().getSize() + 5f));
         radioButtonDefault.addActionListener(e -> default_T(e));
         contentPane.add(radioButtonDefault);
-        radioButtonDefault.setBounds(new Rectangle(new Point(355, 75), radioButtonDefault.getPreferredSize()));
+        radioButtonDefault.setBounds(new Rectangle(new Point(345, 20), radioButtonDefault.getPreferredSize()));
 
         //---- radioButtonAdmin ----
         radioButtonAdmin.setText("\u7ba1\u7406\u5458");
+        radioButtonAdmin.setFont(radioButtonAdmin.getFont().deriveFont(radioButtonAdmin.getFont().getStyle() | Font.BOLD, radioButtonAdmin.getFont().getSize() + 5f));
         radioButtonAdmin.addActionListener(e -> admin_T(e));
         contentPane.add(radioButtonAdmin);
-        radioButtonAdmin.setBounds(new Rectangle(new Point(420, 75), radioButtonAdmin.getPreferredSize()));
+        radioButtonAdmin.setBounds(new Rectangle(new Point(415, 20), radioButtonAdmin.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(550, 295));
+        //---- button2 ----
+        button2.setText("\u8fd4\u56de");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
+        button2.addActionListener(e -> exit(e));
+        contentPane.add(button2);
+        button2.setBounds(new Rectangle(new Point(285, 155), button2.getPreferredSize()));
+
+        contentPane.setPreferredSize(new Dimension(510, 215));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -249,5 +262,6 @@ public class addPage extends JDialog {
     private JRadioButton radioButtonWoman;
     private JRadioButton radioButtonDefault;
     private JRadioButton radioButtonAdmin;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -8,12 +8,14 @@ new FormModel {
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 2
+			"title": "列车过滤器"
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "列车类型"
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 1, 5, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 20
@@ -21,6 +23,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "车厢数量"
+				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 60
@@ -28,6 +31,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
 				"text": "发车时间"
+				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 100
@@ -35,6 +39,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
 				"text": "起点站"
+				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 140
@@ -42,6 +47,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label6"
 				"text": "终点站"
+				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 180
@@ -49,6 +55,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton1"
 				"text": "普快"
+				"font": #SwingDerivedFont0
 				auxiliary() {
 					"JavaCodeGenerator.preCreateCode": "ButtonGroup group = new ButtonGroup();"
 					"JavaCodeGenerator.postCreateCode": "group.add(radioButton1);"
@@ -61,19 +68,20 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton2"
 				"text": "高铁"
+				"font": #SwingDerivedFont0
 				auxiliary() {
 					"JavaCodeGenerator.postCreateCode": "group.add(radioButton2);"
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "gaotie", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 185
+				"x": 180
 				"y": 20
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "carriage_lower"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 105
-				"y": 55
+				"y": 60
 				"width": 55
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -81,32 +89,33 @@ new FormModel {
 				"text": "~"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 165
-				"y": 60
+				"y": 65
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "carriage_upper"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 180
-				"y": 55
+				"y": 60
 				"width": 55
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "start_station"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 105
-				"y": 135
-				"width": 125
+				"y": 140
+				"width": 130
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "end_station"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 105
-				"y": 175
-				"width": 125
+				"y": 180
+				"width": 130
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "搜索"
+				"font": &SwingDerivedFont1 new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Search", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 20
@@ -115,9 +124,10 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "返回"
+				"font": #SwingDerivedFont1
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 150
+				"x": 155
 				"y": 225
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -126,12 +136,12 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "DateSelect", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 105
-				"y": 95
+				"y": 100
 				"width": 130
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 20, 0 )
-			"size": new java.awt.Dimension( 265, 305 )
+			"size": new java.awt.Dimension( 260, 280 )
 		} )
 	}
 }

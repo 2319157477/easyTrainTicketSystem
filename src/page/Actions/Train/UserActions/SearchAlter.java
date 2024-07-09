@@ -2,11 +2,9 @@
  * Created by JFormDesigner on Sat Jul 06 19:51:40 CST 2024
  */
 
-package page.manage.Train.UserActions;
+package page.Actions.Train.UserActions;
 
-import page.manage.Train.AdminActions.addPage;
-import page.manage.Train.AdminActions.alterPage;
-import page.manage.Train.AdminActions.searchPage;
+import page.Actions.Train.AdminActions.searchPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -15,17 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import sql.DBUtil;
 
 /**
  * @author 23191
  */
 public class SearchAlter extends JFrame {
-    String url = "jdbc:mysql://localhost:3306/train_station? useSSL = false&serverTimezone = GMT&characterEncoding = gb2312";
-    String user = "root";
-    String password = "lbc041103";
-
     String phoneNumber;
-    Connection admin_con;
     String alter_id = "";
     Statement adminState;
     ResultSet adminRs;
@@ -40,15 +34,11 @@ public class SearchAlter extends JFrame {
     String c_end_time;
     String c_running_time;
     String c_arrive_day;
+    Color gray = new Color(54, 54, 54);
     String[] columnNames =
             {"车次", "列车类型", "车箱数", "始发站", "终点站", "发车时间", "到达时间", "路途时间", "发车日期"};
     public SearchAlter(String phone) {
         phoneNumber = phone;
-        try {
-            admin_con = DriverManager.getConnection(url, user, password);
-        } catch (SQLException var10) {
-            throw new RuntimeException(var10);
-        }
         initComponents();
     }
     private void Search(ActionEvent e) {
@@ -59,7 +49,7 @@ public class SearchAlter extends JFrame {
             scrollPane1.revalidate();
             scrollPane1.repaint();
             try {
-                adminState = admin_con.createStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM train_info WHERE train_id = '" + search_id + "'";
                 System.out.println(sql);
                 adminRs = adminState.executeQuery(sql);
@@ -120,7 +110,7 @@ public class SearchAlter extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -156,8 +146,8 @@ public class SearchAlter extends JFrame {
                 scrollPane1.revalidate();
                 scrollPane1.repaint();
                 Statement countState;
-                countState = admin_con.createStatement();
-                adminState = admin_con.createStatement();
+                countState = DBUtil.getStatement();
+                adminState = DBUtil.getStatement();
                 String sql = "SELECT * FROM train_info WHERE " + conditions;
                 String sqlC = "SELECT COUNT(*) FROM train_info WHERE " + conditions;
                 System.out.println(sql);
@@ -228,7 +218,7 @@ public class SearchAlter extends JFrame {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                         if (isSelected) {
-                            c.setBackground(Color.YELLOW);
+                            c.setBackground(gray);
                         } else {
                             c.setBackground(table.getBackground());
                         }
@@ -258,7 +248,7 @@ public class SearchAlter extends JFrame {
         Statement trainState;
         int i = 0;
         try {
-            trainState = admin_con.createStatement();
+            trainState = DBUtil.getStatement();
             ResultSet rs2 = trainState.executeQuery("SELECT COUNT(*) FROM train_info");
             if (rs2.next()) {
                 count = rs2.getInt(1);
@@ -328,7 +318,7 @@ public class SearchAlter extends JFrame {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (isSelected) {
-                    c.setBackground(Color.YELLOW);
+                    c.setBackground(gray);
                 } else {
                     c.setBackground(table.getBackground());
                 }
@@ -383,48 +373,55 @@ public class SearchAlter extends JFrame {
 
         //======== this ========
         setVisible(true);
+        setTitle("\u8d2d\u4e70\u8f66\u7968");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         var contentPane = getContentPane();
         contentPane.setLayout(null);
         contentPane.add(search_id_input);
-        search_id_input.setBounds(205, 35, 120, search_id_input.getPreferredSize().height);
+        search_id_input.setBounds(105, 20, 120, search_id_input.getPreferredSize().height);
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(140, 125, 955, 600);
+        scrollPane1.setBounds(25, 65, 955, 600);
 
         //---- button1 ----
         button1.setText("\u67e5\u627e");
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getStyle() | Font.BOLD, button1.getFont().getSize() + 10f));
         button1.addActionListener(e -> Search(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(335, 35), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(245, 15), button1.getPreferredSize()));
 
         //---- label1 ----
         label1.setText("\u8f93\u5165\u7f16\u53f7");
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 5f));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(145, 40), label1.getPreferredSize()));
+        label1.setBounds(new Rectangle(new Point(25, 20), label1.getPreferredSize()));
 
         //---- button3 ----
         button3.setText("\u8fc7\u6ee4\u5668");
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getStyle() | Font.BOLD, button3.getFont().getSize() + 10f));
         button3.addActionListener(e -> Filter(e));
         contentPane.add(button3);
-        button3.setBounds(new Rectangle(new Point(475, 35), button3.getPreferredSize()));
+        button3.setBounds(new Rectangle(new Point(630, 15), button3.getPreferredSize()));
 
         //---- button4 ----
         button4.setText("\u663e\u793a\u5168\u90e8");
+        button4.setFont(button4.getFont().deriveFont(button4.getFont().getStyle() | Font.BOLD, button4.getFont().getSize() + 10f));
         button4.addActionListener(e -> ShowAll(e));
         contentPane.add(button4);
-        button4.setBounds(new Rectangle(new Point(615, 35), button4.getPreferredSize()));
+        button4.setBounds(new Rectangle(new Point(755, 15), button4.getPreferredSize()));
 
         //---- button2 ----
         button2.setText("\u8d2d\u7968");
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD, button2.getFont().getSize() + 10f));
         button2.addActionListener(e -> Purchase(e));
         contentPane.add(button2);
-        button2.setBounds(new Rectangle(new Point(795, 35), button2.getPreferredSize()));
+        button2.setBounds(new Rectangle(new Point(900, 15), button2.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(1250, 885));
+        contentPane.setPreferredSize(new Dimension(1000, 685));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
