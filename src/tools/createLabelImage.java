@@ -6,7 +6,7 @@ public class createLabelImage {
     public createLabelImage(JLabel label, String filename) {
         int width = label.getWidth();
         int height = label.getHeight();
-        String file = "D:\\Code\\java\\TrainTicketSystem\\Images\\" + filename;
+        String file = "Images\\" + filename;
         ImageIcon image = new ImageIcon(file);
         image.setImage(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT ));
         label.setIcon(image);

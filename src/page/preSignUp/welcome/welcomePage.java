@@ -2,10 +2,15 @@ package page.preSignUp.welcome;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.*;
 import page.preSignUp.SignUp.*;
 import page.preSignUp.logIn.*;
+import sql.DBUtil;
 import tools.createLabelImage;
+import sql.testLink;
 /*
  * Created by JFormDesigner on Sat Jul 06 14:37:36 CST 2024
  */
@@ -16,8 +21,33 @@ import tools.createLabelImage;
  * @author 23191
  */
 public class welcomePage extends JFrame {
+    boolean isC;
 	public welcomePage() {
-		initComponents();
+        try {
+            FileReader fileReader = new FileReader("src/sql/mysqlLogin.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            String info = reader.readLine();
+            if (info != null) {
+                String user = info.split(":")[0];
+                String pwd = info.split(":")[1];
+                testLink test = new testLink();
+                isC = test.test_Link(user, pwd);
+                if (isC)
+                    DBUtil.getInfo(user, pwd);
+            }
+            else isC = false;
+
+            if (isC) {
+                initComponents();
+            }
+            else {
+                new loginDB(this);
+                initComponents();
+            }
+        }catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
 	}
 	private void signUpUser(ActionEvent e) {
 		new signUpPage(this);

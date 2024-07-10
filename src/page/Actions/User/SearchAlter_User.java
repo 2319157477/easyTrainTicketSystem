@@ -71,21 +71,11 @@ public class SearchAlter_User extends JFrame {
                 user = new Object[1][5];
                 for (int j = 0; j < 9; j ++) {
                     switch (j) {
-                        case 0:
-                            user[0][j] = c_id;
-                            break;
-                        case 1:
-                            user[0][j] = c_pwd;
-                            break;
-                        case 2:
-                            user[0][j] = c_name;
-                            break;
-                        case 3:
-                            user[0][j] = userType;
-                            break;
-                        case 4:
-                            user[0][j] = userGender;
-                            break;
+                        case 0 -> user[0][j] = c_id;
+                        case 1 -> user[0][j] = c_pwd;
+                        case 2 -> user[0][j] = c_name;
+                        case 3 -> user[0][j] = userType;
+                        case 4 -> user[0][j] = userGender;
                     }
                 }
                 table1 = new JTable(user, columnNames) {
@@ -164,21 +154,11 @@ public class SearchAlter_User extends JFrame {
 
                     for (int j = 0; j < 5; j++) {
                         switch (j) {
-                            case 0:
-                                user[i][j] = c_id;
-                                break;
-                            case 1:
-                                user[i][j] = c_pwd;
-                                break;
-                            case 2:
-                                user[i][j] = c_name;
-                                break;
-                            case 3:
-                                user[i][j] = userType;
-                                break;
-                            case 4:
-                                user[i][j] = userGender;
-                                break;
+                            case 0 -> user[i][j] = c_id;
+                            case 1 -> user[i][j] = c_pwd;
+                            case 2 -> user[i][j] = c_name;
+                            case 3 -> user[i][j] = userType;
+                            case 4 -> user[i][j] = userGender;
                         }
                     }
                     i ++;
@@ -246,21 +226,11 @@ public class SearchAlter_User extends JFrame {
 
                 for (int j = 0; j < 5; j++) {
                     switch (j) {
-                        case 0:
-                            user[i][j] = c_id;
-                            break;
-                        case 1:
-                            user[i][j] = c_pwd;
-                            break;
-                        case 2:
-                            user[i][j] = c_name;
-                            break;
-                        case 3:
-                            user[i][j] = userType;
-                            break;
-                        case 4:
-                            user[i][j] = userGender;
-                            break;
+                        case 0 -> user[i][j] = c_id;
+                        case 1 -> user[i][j] = c_pwd;
+                        case 2 -> user[i][j] = c_name;
+                        case 3 -> user[i][j] = userType;
+                        case 4 -> user[i][j] = userGender;
                     }
                 }
                 i ++;
