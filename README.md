@@ -1,3 +1,2 @@
 这是一份大学Java实训作业
-导入目录下的train_station.sql文件到本地mysql数据库中
-修改src/sql目录下的DBUtil中的用户名及密码字段为本地数据库的用户名密码，即可运行
+导入目录下的train_station.sql文件到本地mysql数据库中即可运行

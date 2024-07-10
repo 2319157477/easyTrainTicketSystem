@@ -74,32 +74,15 @@ public class SearchAlter extends JFrame {
                 train = new Object[1][9];
                 for (int j = 0; j < 9; j ++) {
                     switch (j) {
-                        case 0:
-                            train[0][j] = c_id;
-                            break;
-                        case 1:
-                            train[0][j] = c_type;
-                            break;
-                        case 2:
-                            train[0][j] = c_carriages;
-                            break;
-                        case 3:
-                            train[0][j] = c_start_station;
-                            break;
-                        case 4:
-                            train[0][j] = c_end_station;
-                            break;
-                        case 5:
-                            train[0][j] = c_start_time;
-                            break;
-                        case 6:
-                            train[0][j] = c_end_time;
-                            break;
-                        case 7:
-                            train[0][j] = c_running_time;
-                            break;
-                        case 8:
-                            train[0][j] = c_arrive_day;
+                        case 0 -> train[0][j] = c_id;
+                        case 1 -> train[0][j] = c_type;
+                        case 2 -> train[0][j] = c_carriages;
+                        case 3 -> train[0][j] = c_start_station;
+                        case 4 -> train[0][j] = c_end_station;
+                        case 5 -> train[0][j] = c_start_time;
+                        case 6 -> train[0][j] = c_end_time;
+                        case 7 -> train[0][j] = c_running_time;
+                        case 8 -> train[0][j] = c_arrive_day;
                     }
                 }
                 table1 = new JTable(train, columnNames) {
@@ -180,32 +163,15 @@ public class SearchAlter extends JFrame {
 
                     for (int j = 0; j < 9; j++) {
                         switch (j) {
-                            case 0:
-                                train[i][j] = c_id;
-                                break;
-                            case 1:
-                                train[i][j] = c_type;
-                                break;
-                            case 2:
-                                train[i][j] = c_carriages;
-                                break;
-                            case 3:
-                                train[i][j] = c_start_station;
-                                break;
-                            case 4:
-                                train[i][j] = c_end_station;
-                                break;
-                            case 5:
-                                train[i][j] = c_start_time;
-                                break;
-                            case 6:
-                                train[i][j] = c_end_time;
-                                break;
-                            case 7:
-                                train[i][j] = c_running_time;
-                                break;
-                            case 8:
-                                train[i][j] = c_arrive_day;
+                            case 0 -> train[i][j] = c_id;
+                            case 1 -> train[i][j] = c_type;
+                            case 2 -> train[i][j] = c_carriages;
+                            case 3 -> train[i][j] = c_start_station;
+                            case 4 -> train[i][j] = c_end_station;
+                            case 5 -> train[i][j] = c_start_time;
+                            case 6 -> train[i][j] = c_end_time;
+                            case 7 -> train[i][j] = c_running_time;
+                            case 8 -> train[i][j] = c_arrive_day;
                         }
                     }
                     i ++;
@@ -276,32 +242,15 @@ public class SearchAlter extends JFrame {
 
                 for (int j = 0; j < 9; j ++) {
                     switch (j) {
-                        case 0:
-                            train[i][j] = c_id;
-                            break;
-                        case 1:
-                            train[i][j] = c_type;
-                            break;
-                        case 2:
-                            train[i][j] = c_carriages;
-                            break;
-                        case 3:
-                            train[i][j] = c_start_station;
-                            break;
-                        case 4:
-                            train[i][j] = c_end_station;
-                            break;
-                        case 5:
-                            train[i][j] = c_start_time;
-                            break;
-                        case 6:
-                            train[i][j] = c_end_time;
-                            break;
-                        case 7:
-                            train[i][j] = c_running_time;
-                            break;
-                        case 8:
-                            train[i][j] = c_arrive_day;
+                        case 0 -> train[i][j] = c_id;
+                        case 1 -> train[i][j] = c_type;
+                        case 2 -> train[i][j] = c_carriages;
+                        case 3 -> train[i][j] = c_start_station;
+                        case 4 -> train[i][j] = c_end_station;
+                        case 5 -> train[i][j] = c_start_time;
+                        case 6 -> train[i][j] = c_end_time;
+                        case 7 -> train[i][j] = c_running_time;
+                        case 8 -> train[i][j] = c_arrive_day;
                     }
                 }
                 i ++;
