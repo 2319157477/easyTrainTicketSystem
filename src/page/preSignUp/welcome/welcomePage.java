@@ -3,8 +3,8 @@ package page.preSignUp.welcome;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import page.preSignUp.zhuce.*;
-import page.preSignUp.denglu.*;
+import page.preSignUp.SignUp.*;
+import page.preSignUp.logIn.*;
 import tools.createLabelImage;
 /*
  * Created by JFormDesigner on Sat Jul 06 14:37:36 CST 2024

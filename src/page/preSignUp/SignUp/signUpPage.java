@@ -1,4 +1,4 @@
-package page.preSignUp.zhuce;
+package page.preSignUp.SignUp;
 
 import sql.DBUtil;
 

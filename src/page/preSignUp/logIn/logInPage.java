@@ -1,4 +1,4 @@
-package page.preSignUp.denglu;
+package page.preSignUp.logIn;
 
 import java.awt.*;
 import java.awt.event.*;

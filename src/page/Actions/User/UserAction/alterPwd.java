@@ -18,6 +18,7 @@ import javax.swing.*;
 public class alterPwd extends JDialog {
     String phoneNumber, O_pwd, A_pwd;
     boolean isSame = false;
+    boolean isTrue = false;
     public alterPwd(JFrame owner, String phone) {
         super(owner, "修改密码", true);
         phoneNumber = phone;
@@ -41,12 +42,12 @@ public class alterPwd extends JDialog {
         char[] Input = passwordField1.getPassword();
         String I_pwd = new String(Input);
         if (I_pwd.equals(O_pwd)) {
-            isSame = true;
+            isTrue = true;
             O_pwdErr.setVisible(false);
             repaint();
         }
         else {
-            isSame = false;
+            isTrue = false;
             O_pwdErr.setVisible(true);
             repaint();
         }
@@ -58,16 +59,18 @@ public class alterPwd extends JDialog {
         if (A_pwd_1.equals(A_pwd_2)) {
             A_pwd = A_pwd_2;
             A_pwdErr.setVisible(false);
+            isSame = true;
             repaint();
         }
         else {
             A_pwdErr.setVisible(true);
+            isSame = false;
             repaint();
         }
     }
 
     private void SureButton(ActionEvent e) {
-        if (isSame) {
+        if (isSame && isTrue) {
             String sql = "UPDATE user SET user_pwd = '" + A_pwd + "' WHERE user_phone = '" + phoneNumber + "'";
             try {
                 PreparedStatement pstmt = DBUtil.getPstmt(sql);;
@@ -79,7 +82,7 @@ public class alterPwd extends JDialog {
             }
         }
         else {
-            JOptionPane.showMessageDialog(this, "原密码输入错误！");
+            JOptionPane.showMessageDialog(this, "密码输入错误！");
         }
     }
 
