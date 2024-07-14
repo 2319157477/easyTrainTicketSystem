@@ -20,6 +20,7 @@ import sql.testLink;
 public class loginDB extends JDialog {
     private String username;
     private String pwd;
+    boolean isA;
     public loginDB(JFrame owner) {
         super(owner, "登录数据库", true);
         initComponents();
@@ -40,6 +41,7 @@ public class loginDB extends JDialog {
                     fileWriter.write(str);
                     DBUtil.getInfo(username, pwd);
                     JOptionPane.showMessageDialog(this, "登录信息保存成功！");
+                    isA = true;
                     this.dispose();
                 }
             }catch (IOException ex) {
@@ -49,6 +51,10 @@ public class loginDB extends JDialog {
         else {
             JOptionPane.showMessageDialog(this, "错误的用户名或密码！");
         }
+    }
+
+    public boolean getStat() {
+        return isA;
     }
 
     private void exit(ActionEvent e) {

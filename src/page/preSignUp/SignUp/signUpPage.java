@@ -74,7 +74,7 @@ public class signUpPage extends JDialog {
 		System.out.println(pwd2);
 		if (!pwd1.equals(pwd2)) {
 			userPwdErr.setVisible(true);
-			//System.out.println("pwdErr!");
+            upUserPwd = "";
 			repaint();
 		}
 		else {

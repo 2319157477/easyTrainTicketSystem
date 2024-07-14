@@ -124,6 +124,8 @@ public class DateSystem extends JDialog {
         bottomPanel.add(submitButton);
 
         add(bottomPanel, BorderLayout.SOUTH);
+        previousButton.doClick();
+        nextButton.doClick();
         repaint();
         revalidate();
         pack();

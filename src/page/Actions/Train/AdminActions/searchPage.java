@@ -24,11 +24,10 @@ public class searchPage extends JDialog {
 
     public searchPage(JFrame parent) {
         super(parent, "选择条件", true);
-        initComponents();  // 确保在构造方法中调用 initComponents()
-        // 调用 pack() 和 setLocationRelativeTo() 以确保对话框布局正确
+        initComponents();
         pack();
         setLocationRelativeTo(parent);
-        setVisible(true); // 确保在所有组件初始化和布局完成后，再调用 setVisible(true)
+        setVisible(true);
     }
     public String getSearchCondition() {
         String conditions = "";

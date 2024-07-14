@@ -41,8 +41,10 @@ public class welcomePage extends JFrame {
                 initComponents();
             }
             else {
-                new loginDB(this);
-                initComponents();
+                loginDB loginDB1 = new loginDB(this);
+                if (loginDB1.getStat())
+                    initComponents();
+                else System.exit(0);
             }
         }catch (IOException ex)
         {
